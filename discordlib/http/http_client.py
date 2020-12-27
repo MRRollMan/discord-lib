@@ -11,7 +11,7 @@ class HTTPClient(AbstractHTTPClient):
             self,
             loop: Optional[asyncio.AbstractEventLoop] = None,
             session: Optional[ClientSession] = None,
-            verify_ssl: Optional[bool] = False,
+            verify_ssl: Optional[bool] = True,
             headers: Optional[dict] = None,
             **kwargs
     ):
@@ -35,8 +35,8 @@ class HTTPClient(AbstractHTTPClient):
         async with self.session.request(method=method, url=url, data=data, **kwargs) as response:
             return await response.read()
 
-    async def request(self, method: str, url: str, **kwargs) -> ClientResponse:
-        return await self.session.request(method=method, url=url, **kwargs)
+    async def request(self, method: str, url: str, data: Optional[dict] = None, **kwargs) -> ClientResponse:
+        return await self.session.request(method=method, url=url, data=data, **kwargs)
 
     async def close(self) -> NoReturn:
         await self.session.close()
