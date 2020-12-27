@@ -17,7 +17,7 @@ class HTTPClient(AbstractHTTPClient):
     ):
         self.loop = loop or asyncio.get_event_loop()
         self.session = session or ClientSession(
-            connector=TCPConnector(verify_ssl=verify_ssl),
+            connector=TCPConnector(verify_ssl=verify_ssl, loop=self.loop),
             loop=self.loop,
             headers=headers,
             **kwargs

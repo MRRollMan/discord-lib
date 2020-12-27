@@ -1,4 +1,6 @@
-from discordlib.http import HTTPClient
-from discordlib.http import ClientManager
+__version__ = '0.0.2'
 
-__version__ = '0.0.1'
+from discordlib.http import HTTPClient
+from discordlib.http import ContextManager
+
+__all__ = ['HTTPClient', 'ContextManager']

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from discordlib.http import AbstractHTTPClient
 
 
-class AbstractClientManager(ABC):
+class AbstractContextManager(ABC):
     @abstractmethod
     def __init__(self, *args, **kwargs):
         pass
@@ -17,7 +17,7 @@ class AbstractClientManager(ABC):
     async def close(self):
         pass
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> AbstractHTTPClient:
         return self.http_client
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):

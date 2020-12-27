@@ -1,3 +1,0 @@
-from discordlib.http.client_manager.abc_client_manager import AbstractClientManager
-from discordlib.http.client_manager.client_manager import ClientManager
-
