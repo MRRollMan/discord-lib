@@ -3,7 +3,7 @@ from typing import Optional, NoReturn
 
 from aiohttp import ClientSession, TCPConnector, ClientResponse
 
-from .abc_http_client import AbstractHTTPClient
+from discordlib.http import AbstractHTTPClient
 
 
 class HTTPClient(AbstractHTTPClient):
