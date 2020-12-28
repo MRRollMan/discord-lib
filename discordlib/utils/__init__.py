@@ -1,1 +1,2 @@
 from discordlib.utils.generate_user_agent import generate_user_agent
+from discordlib.utils.get_request_data import get_request_data
