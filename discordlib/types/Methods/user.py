@@ -10,11 +10,11 @@ class UserResource(AbstractResource):
         result = await self.request(HTTPMethod.GET, ME)
         return User(**result)
 
-    async def get(self, user_id: int):
+    async def get(self, user_id: int) -> User:
         result = await self.request(HTTPMethod.GET, user_id)
         return User(**result)
 
-    async def modify_user(self, username: Optional[str] = None, avatar: Optional[str] = None):
+    async def modify_user(self, username: Optional[str] = None, avatar: Optional[str] = None) -> User:
         data = get_request_data(locals())
         result = await self.request(HTTPMethod.PATCH, ME, data=data)
         return User(**result)

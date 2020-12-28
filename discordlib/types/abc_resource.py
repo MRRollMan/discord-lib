@@ -9,4 +9,4 @@ class AbstractResource(ABC):
         self.__api = api
 
     async def request(self, method: str, path: str, data: Optional[dict] = None):
-        return await self.__api.request(method, self.resource_name + path, data)
+        return await self.__api.request(method, self.resource_name + f"{path}", data)
