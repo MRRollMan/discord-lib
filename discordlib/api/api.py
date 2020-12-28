@@ -3,12 +3,13 @@ from typing import Optional
 from discordlib import ContextManager
 from discordlib import HTTPClient
 from discordlib.api import AbstractAPI
+from discordlib.types import Resources
 from discordlib.utils import generate_user_agent
 
 
 class API(AbstractAPI):
     _api_version: int = 7
-    _api_url: str = 'https://discord.com/api/v{0}/'
+    _api_url: str = 'https://discord.com/api/v{0}'
 
     def __init__(
             self,
@@ -24,6 +25,7 @@ class API(AbstractAPI):
         self._api_url = self._api_url.format(self._api_version)
         self._http_client = HTTPClient(headers={"Authorization": self._bot_token, "User-Agent": self._user_agent})
         self.http = context_manager or ContextManager(http_client=self._http_client)
+        self.resources = Resources(self)
 
     async def request(self, method: str, path: str, data: dict = None) -> dict:
         async with self.http as session:
@@ -33,3 +35,6 @@ class API(AbstractAPI):
                 data=data
             )
         return response
+
+    async def close(self):
+        await self.http.close()

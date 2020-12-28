@@ -21,4 +21,4 @@ class AbstractContextManager(ABC):
         return self.http_client
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self.close()
+        pass
