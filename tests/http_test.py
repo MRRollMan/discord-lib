@@ -3,12 +3,9 @@ import pytest
 from sys import version_info as py_ver
 from http import HTTPStatus
 
-from aiohttp import __version__ as aiohttpver
-
 from discordlib import HTTPClient
 from discordlib import ContextManager
-from discordlib import __version__ as discordlibver
-
+from discordlib.utils import generate_user_agent
 
 @pytest.mark.asyncio
 async def test_http_request():
@@ -20,7 +17,7 @@ async def test_http_request():
 
 @pytest.mark.asyncio
 async def test_user_agent_http():
-    user_agent = f'TestRequest (discordlib/{discordlibver}) Python/{py_ver[0]}.{py_ver[1]} aiohttp/{aiohttpver}'
+    user_agent = generate_user_agent('TestRequest')
     client = HTTPClient(headers={'User-Agent': user_agent})
     response = await client.request_json('GET', 'https://httpbin.org/user-agent')
     await client.close()
